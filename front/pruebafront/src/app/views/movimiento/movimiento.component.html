@@ -1,0 +1,83 @@
+<form class="example-form" [formGroup]="form" (ngSubmit)="buscar()" class="a">
+    <mat-form-field class="example-form-field">
+        <mat-label>First campaign</mat-label>
+        <mat-date-range-input
+          [formGroup]="form"
+          [rangePicker]="campaignOnePicker"
+          [comparisonStart]="form.value.start"
+          [comparisonEnd]="form.value.end">
+          <input matStartDate placeholder="Start date" formControlName="start">
+          <input matEndDate placeholder="End date" formControlName="end">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Cliente ID</mat-label>
+        <input matInput placeholder="1" formControlName="clientId">
+      </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" >
+        <mat-icon>search</mat-icon>
+        <span>Buscar</span>
+    </button>
+</form>
+<div class="b">
+    <button mat-raised-button color="primary" (click)="generarPDF()">
+        <mat-icon>picture_as_pdf</mat-icon>
+        <span>PDF</span>
+    </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.fecha}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cliente">
+        <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cliente}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="numeroCuenta">
+        <mat-header-cell *matHeaderCellDef> Numero Cuenta </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.numeroCuenta}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+        <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.tipo}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="saldoInicial">
+        <mat-header-cell *matHeaderCellDef> Saldo Inicial </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.saldoInicial}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="movimiento">
+        <mat-header-cell *matHeaderCellDef> Movimiento </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.movimiento}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="saldoDisponible">
+        <mat-header-cell *matHeaderCellDef> Saldo Disponible </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.saldoDisponible}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+            <div *ngIf="element.estado">
+              <i class="fas fa-circle text-emerald-500 mr-2"></i> Activo
+            </div>
+            <div *ngIf="!element.estado">
+              <i class="fas fa-circle text-red-500 mr-2"></i> Inactivo 
+            </div>
+          </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>

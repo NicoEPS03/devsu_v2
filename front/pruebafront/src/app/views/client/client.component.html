@@ -1,0 +1,83 @@
+<h1>Clientes</h1>
+<div class="a">
+    <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+</div>
+<div class="b">
+    <button mat-raised-button style="background-color: #fd0;" (click)="insertModal()">
+        <mat-icon>add</mat-icon>
+        <span>Nuevo</span>
+    </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+     
+    <ng-container matColumnDef="idPersona">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.idPersona}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="genero">
+        <mat-header-cell *matHeaderCellDef> Genero </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.genero}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edad">
+        <mat-header-cell *matHeaderCellDef> Edad </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.edad}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="identificacion">
+        <mat-header-cell *matHeaderCellDef> Identificacion </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.identificacion}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="direccion">
+        <mat-header-cell *matHeaderCellDef> Direccion </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.direccion}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+        <mat-header-cell *matHeaderCellDef> Telefono </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.telefono}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="password">
+        <mat-header-cell *matHeaderCellDef> Contraseña </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+            <div *ngIf="element.estado">
+              <i class="fas fa-circle text-emerald-500 mr-2"></i> Activo
+            </div>
+            <div *ngIf="!element.estado">
+              <i class="fas fa-circle text-red-500 mr-2"></i> Inactivo 
+            </div>
+          </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="accion">
+        <mat-header-cell *matHeaderCellDef> Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button mat-button style="color: #fd0" (click)="editModal(element.idPersona)" title="Editar">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-button style="color: #fd0" (click)="deleteModal(element.idPersona)"title="Eliminar">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>

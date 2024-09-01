@@ -1,0 +1,62 @@
+<mat-dialog-content class="mat-typography">
+    <div
+    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+    >
+        <div class="px-4 py-4">
+        <form [formGroup]="form" #frmCoach="ngForm">
+            <div [hidden]="true">
+                <mat-form-field class="input">
+                    <mat-label>Id</mat-label>
+                    <input matInput formControlName="idPersona" [hidden]="true">
+                </mat-form-field>
+            </div>
+            <mat-form-field class="input w-full">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre" maxlength="30" minlength="5">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Seleccione el genero</mat-label>
+                <mat-select formControlName="genero">
+                    <mat-label>{{genero}}</mat-label>
+                  <mat-option value="F">F</mat-option>
+                  <mat-option value="M">M</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <br>
+            <mat-form-field class="input w-full">
+                <mat-label>Edad</mat-label>
+                <input matInput formControlName="edad" type="number">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input w-full">
+                <mat-label>Identificacion</mat-label>
+                <input matInput formControlName="identificacion" maxlength="30" minlength="5">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input w-full">
+                <mat-label>Direccion</mat-label>
+                <input matInput formControlName="direccion" maxlength="50" minlength="5">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input w-full">
+                <mat-label>Telefono</mat-label>
+                <input matInput formControlName="telefono" maxlength="10">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input w-full">
+                <mat-label>Contraseña</mat-label>
+                <input matInput formControlName="password" maxlength="30" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+            </mat-form-field>
+            <br>
+        </form>
+    </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <button mat-button  [disabled]="frmCoach.invalid" (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

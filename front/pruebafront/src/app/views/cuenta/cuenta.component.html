@@ -1,0 +1,63 @@
+<h1>Cuentas</h1>
+<div class="a">
+    <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+</div>
+<div class="b">
+    <button mat-raised-button style="background-color: #fd0;" (click)="insertModal()">
+        <mat-icon>add</mat-icon>
+        <span>Nuevo</span>
+    </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+     
+    <ng-container matColumnDef="numeroCuenta">
+        <mat-header-cell *matHeaderCellDef> Numero Cuenta </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.numeroCuenta}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="tipoCuenta">
+        <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.tipoCuenta}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="saldo">
+        <mat-header-cell *matHeaderCellDef> Saldo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.saldo}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="clienteId">
+        <mat-header-cell *matHeaderCellDef> ID Cliente </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.clienteId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+            <div *ngIf="element.estado">
+              <i class="fas fa-circle text-emerald-500 mr-2"></i> Activo
+            </div>
+            <div *ngIf="!element.estado">
+              <i class="fas fa-circle text-red-500 mr-2"></i> Inactivo 
+            </div>
+          </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="accion">
+        <mat-header-cell *matHeaderCellDef> Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button mat-button style="color: #fd0" (click)="editModal(element.numeroCuenta)" title="Editar">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-button style="color: #fd0" (click)="deleteModal(element.numeroCuenta)"title="Eliminar">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>

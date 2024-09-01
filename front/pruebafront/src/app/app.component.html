@@ -1,0 +1,37 @@
+<div class="example-container">
+  <mat-toolbar style="background-color: #fd0;" class="example-toolbar" > 
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+ 
+    <mat-menu #menu="matMenu">
+    </mat-menu>   
+  </mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #sidenav style="width: 300px">
+ 
+      <img src="assets/logo.png" width="250px" style="margin-left: 20px">
+      <mat-divider></mat-divider> 
+      <button mat-menu-item  (click)="sidenav.toggle()" style="cursor: pointer" routerLink="/clientes">
+        <mat-icon>person_apron</mat-icon>
+        <span>Clientes</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item  (click)="sidenav.toggle()" style="cursor: pointer" routerLink="/cuentas">
+        <mat-icon>wallet</mat-icon>
+        <span>Cuentas</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item  (click)="sidenav.toggle()" style="cursor: pointer" routerLink="/movimientos">
+        <mat-icon>swap_horiz</mat-icon>
+        <span>Movimientos</span>
+      </button>
+      <mat-divider></mat-divider> 
+      
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>  
+    </mat-sidenav-content>
+</mat-sidenav-container>
+</div>

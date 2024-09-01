@@ -1,0 +1,38 @@
+<mat-dialog-content class="mat-typography">
+    <div
+    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+    >
+        <div class="px-4 py-4">
+        <form [formGroup]="form" #frmCoach="ngForm">
+            <mat-form-field class="input w-full">
+                <mat-label>Numero Cuenta</mat-label>
+                <input matInput formControlName="numeroCuenta" maxlength="30" minlength="5">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Tipo</mat-label>
+                <mat-select formControlName="tipoCuenta">
+                    <mat-label>{{tipo}}</mat-label>
+                  <mat-option value="Ahorros">Ahorros</mat-option>
+                  <mat-option value="Corriente">Corriente</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <br>
+            <mat-form-field class="input w-full">
+                <mat-label>Saldo</mat-label>
+                <input matInput formControlName="saldo" type="number" maxlength="30">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input w-full">
+                <mat-label>Id Cliente</mat-label>
+                <input matInput formControlName="clienteId" >
+            </mat-form-field>
+            <br>
+        </form>
+    </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <button mat-button  [disabled]="frmCoach.invalid" (click)="guardar()">Guardar</button>
+</mat-dialog-actions>
